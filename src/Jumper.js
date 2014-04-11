@@ -56,10 +56,14 @@ var Jumper = cc.Sprite.extend({
         this.updateSpritePosition();
     },
 
+    isStill: function(){
+    	return  ( !this.moveLeft ) && ( !this.moveRight );
+    },
+
     updateXMovement: function() {
         if ( this.ground ) {
-            if ( ( !this.moveLeft ) && ( !this.moveRight ) ) {
-                this.autoDeaccelerateX();
+	    if(this.isStill())
+               	this.autoDeaccelerateX();
             } else if ( this.moveRight ) {
                 this.accelerateX( 1 );
             } else {
