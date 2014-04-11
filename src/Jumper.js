@@ -60,15 +60,22 @@ var Jumper = cc.Sprite.extend({
     	return  ( !this.moveLeft ) && ( !this.moveRight );
     },
 
+    increaseAccelration: function(){
+            if ( this.moveRight ) {
+                this.accelerateX( 1 );
+            } 
+	    else {
+                this.accelerateX( -1 );
+            }
+    },
+
     updateXMovement: function() {
         if ( this.ground ) {
 	    if(this.isStill())
                	this.autoDeaccelerateX();
-            } else if ( this.moveRight ) {
-                this.accelerateX( 1 );
-            } else {
-                this.accelerateX( -1 );
-            }
+	    else{
+	    	this.increaseAccelration();
+	    }
         }
         this.x += this.vx;
         if ( this.x < 0 ) {
