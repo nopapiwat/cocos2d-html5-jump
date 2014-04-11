@@ -61,6 +61,15 @@ var Jumper = cc.Sprite.extend({
     },
 
     increaseAccelration: function(){
+        if ( this.x < 0 ) {
+            this.x += screenWidth;
+        }
+        if ( this.x > screenWidth ) {
+            this.x -= screenWidth;
+        }
+    },
+
+    checkOutofBound: function(){
             if ( this.moveRight ) {
                 this.accelerateX( 1 );
             } 
@@ -78,12 +87,7 @@ var Jumper = cc.Sprite.extend({
 	    }
         }
         this.x += this.vx;
-        if ( this.x < 0 ) {
-            this.x += screenWidth;
-        }
-        if ( this.x > screenWidth ) {
-            this.x -= screenWidth;
-        }
+	this.checkOutOfBound();
     },
 
     updateYMovement: function() {
